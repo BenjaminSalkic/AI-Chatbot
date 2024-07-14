@@ -46,7 +46,7 @@ export const userSignup = async (req, res, next) => {
         const user = new User({ name, email, password: hashedPassword });
         await user.save();
         res.clearCookie(COOKIE_NAME, { httpOnly: true, domain: "localhost", signed: true, path: "/" });
-        const token = createToken(existingUser._id.toString(), existingUser.email, "7d");
+        const token = createToken(user._id.toString(), user.email, "7d");
         const expires = new Date();
         expires.setDate(expires.getDate() + 7);
         res.cookie(COOKIE_NAME, token, { path: "/", domain: "localhost", expires: expires, httpOnly: true, signed: true });
