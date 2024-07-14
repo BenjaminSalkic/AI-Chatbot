@@ -7,7 +7,8 @@ import {BrowserRouter} from 'react-router-dom';
 
 const theme = createTheme({typography: {fontFamily: "Roboto Slab,serif",allVariants: {color: "white"}}}); 
 ReactDOM.createRoot(document.getElementById('root')!).render(
-  <React.StrictMode>
+ 
+ <React.StrictMode>
     <BrowserRouter>
       <ThemeProvider theme={theme}>
         <App />
