@@ -5,9 +5,10 @@ import Chat from "./pages/Chat";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import Errorpage from "./pages/Errorpage";
-
+import { useAuth } from "./context/Authcontex";
 
 function App() {
+  console.log(useAuth()?.isLogedIn);
   return <main>
     <Header/>
     <Routes>
