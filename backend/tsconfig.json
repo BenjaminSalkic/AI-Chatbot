@@ -1,4 +1,5 @@
 {
+  "baseUrl": ".",
   "compilerOptions": {
     "module": "NodeNext",
     "moduleResolution": "NodeNext",
@@ -7,5 +8,5 @@
     "outDir": "dist",
     "allowSyntheticDefaultImports": true
   },
-  "include": ["backend/src/**/*.ts", "backend/src/index.ts"]
+  "include": [ "./src/"]
 }
