@@ -1,5 +1,6 @@
 import {createContext, ReactNode,useContext,useEffect,useState} from 'react'
 import { loginUser } from '../helpers/api-communicator';
+import { checkAuthStatus } from '../helpers/api-communicator';
 
 type User = {
     name: string;
@@ -20,7 +21,14 @@ export const AuthProvider = ({children}:{children:ReactNode}) =>{
     const[isLogedIn,setIsLogedIn]= useState(false);
 
     useEffect(()=>{
-        //check if we have cookiees or not
+        async function checkStatus() {
+            const data = await checkAuthStatus();
+            if(data){
+                setUser({email:data.email,name:data.name});
+                setIsLogedIn(true);
+            }
+        }
+        checkStatus();
     },[]);
     const signup = async(name:string,email:string,password:string)=>{};
     const logout = async()=>{};

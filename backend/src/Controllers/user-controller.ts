@@ -34,7 +34,7 @@ export const userLogin = async (req:Request, res:Response, next:NextFunction) =>
         expires.setDate(expires.getDate() + 7);
         res.cookie(COOKIE_NAME,token,{path:"/",domain:"localhost",expires:expires,httpOnly:true,signed:true});
 
-        return res.status(200).json({message: "OK", name:user.name, email:user.email});
+        return res.status(200).json({message: "OK", name:existingUser.name, email:existingUser.email});
 
     } catch (error) {
         console.log(error);
@@ -61,6 +61,26 @@ export const userSignup = async (req:Request, res:Response, next:NextFunction) =
 
 
         return res.status(200).json({message: "OK", name:user.name, email:user.email});
+
+    } catch (error) {
+        console.log(error);
+        return res.status(404).json({message: "ERROR", cause: error.message});        
+    }
+};
+
+export const verifyUser = async (req:Request, res:Response, next:NextFunction) => {
+    try {
+
+        const existingUser = await User.findById(res.locals.jwtData.id);
+        if(!existingUser){
+            return res.status(401).send("User does not exist or token malfunctioned");
+        }
+        console.log(existingUser._id.toString(), res.locals.jwtData.id);
+        if(existingUser._id.toString() !== res.locals.jwtData.id){
+            return res.status(401).send('Perimissions dont match');
+        }
+
+        return res.status(200).json({message: "OK", name:existingUser.name, email:existingUser.email});
 
     } catch (error) {
         console.log(error);
