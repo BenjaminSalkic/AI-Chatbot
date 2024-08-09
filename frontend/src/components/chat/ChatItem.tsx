@@ -31,7 +31,7 @@ const ChatItem = ({content, role}:{content:string,role:'user'|'assistant'}) => {
             {!messageBlocks && (
                 <Typography fontSize={'20px'}>{content}</Typography>
             )}
-            {messageBlocks && messageBlocks.length && messageBlocks.map((block) =>(isCodeBlock(block) ? <SyntaxHiglighter style={coldarkDark} language='javascript' >{block}</SyntaxHiglighter> : <Typography fontSize={'20px'}>{BsLockFill}</Typography>))}
+            {messageBlocks && messageBlocks.length && messageBlocks.map((block) =>(isCodeBlock(block) ? <SyntaxHiglighter style={coldarkDark} language='javascript' >{block}</SyntaxHiglighter> : <Typography fontSize={'20px'}>{block}</Typography>))}
         </Box>
     </Box> :
     <Box sx={{display:'flex', p:2, bgcolor:'#004d56', my:2, gap:2}}>
